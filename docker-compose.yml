@@ -1,0 +1,37 @@
+version: '3.5'
+
+services:
+  webapp:
+    container_name: naila_back
+    hostname: naila_back
+    build: ./dockerfiles
+    image: 'naila_net'
+    ports:
+      - "7061:4000"
+    networks:
+      - naila_net
+    volumes:
+      - "./:/usr/src/app"
+    environment:
+      - ALLOW_OVERRIDE=true
+  mongodb:
+    image: mongo:latest
+    container_name: naila_mongo
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=naila_db
+    volumes:
+      - ./dockerfiles/mongod.conf:/etc/mongod.conf
+      - ./dockerfiles/initdb.d/:/docker-entrypoint-initdb.d/
+      - ./dockerfiles/data/log/:/var/log/mongodb/
+    ports:
+      - "7062:27017"
+    restart: unless-stopped
+    networks:
+      - naila_net
+
+networks:
+  naila_net:
