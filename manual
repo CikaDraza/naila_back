@@ -1,0 +1,5 @@
+1. Instaliraju se node moduli van kontejnera - npm install (sve je podeseno za verziju noda 17, u kontejneru je verzija 17 zadnja, tako da moraju da budu i paketi sa te verzije)
+2. Prvi put pokreces app i bildujes komandom "docker-compose up -d --build", svakog narednog puta samo pokreces kontejnere docker-compose up
+3. Ulazak u docker container docker exec -it naila_back bash
+4. Mongo parametre gadjas u kontejner i podesavas ih u app host: naila_mongo, user and pass: admin admin, port: 27017
+5. Za ulazak u mongo preko klijenta host: localhost, user and pass: admin admin, port: 7062
